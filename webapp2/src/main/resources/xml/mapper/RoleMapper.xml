@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.casclient.demo.dao.RoleMapper" >
+  
+  <select id="selectResourceIdListByRoleId" resultType="java.lang.Long" parameterType="java.lang.Long">
+      select resouce_id as id from role_resource where role_id = #(id)
+  </select>
+  
+  <select id="findRoleByRoleId" resultType="com.casclient.demo.entity.Role"  parameterType="java.lang.Long">
+      select * from role where id = #{id}
+  </select>
+  
+  <select id="selectResourceListByRoleId" resultType="java.util.HashMap" parameterType="java.lang.Long">
+        SELECT
+            e.id AS id, 
+            s.permission AS permission
+        FROM
+            role r
+        LEFT JOIN role_resource e ON r.id = e.role_id
+        LEFT JOIN resource s ON e.resource_id = s.id
+        WHERE
+            r.id = #{id}
+  </select>
+  
+
+  <select id="findRoleByUserId" resultType="java.lang.String">
+      select r.role from role r, user_role ur where ur.role_id = r.id and ur.user_id = #{id,jdbcType=BIGINT}
+  </select>
+</mapper>

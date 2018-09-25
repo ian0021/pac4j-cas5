@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.casclient.demo.dao.UserMapper" >
+  <select id="selectByUserName" parameterType="java.lang.String" resultType="com.casclient.demo.entity.User">
+      select * from user where username = #{username}
+  </select>
+  <select id="selectAlluser" resultType="com.casclient.demo.entity.User">
+      select * from user
+  </select>
+
+  </mapper>
